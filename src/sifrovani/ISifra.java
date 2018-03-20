@@ -14,6 +14,8 @@ public interface ISifra {
 	
 	void setPathTo(String path) throws IOException;
 	
+	void setPassword(int password);
+	
 	void XOR();
 	
 	String sifrovani(String [] pole);
