@@ -1,5 +1,6 @@
 package sifrovani;
 
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,13 @@ import java.io.IOException;
 
 import javax.swing.*;
 
+/**
+ * Třída sloužící jako user interface k programu
+ * 
+ * @author Vít Vágner
+ * @version 1.0
+ *
+ */
 public class Frame extends JFrame {
 	
 	private ISifra sifra;
@@ -17,10 +25,16 @@ public class Frame extends JFrame {
 	private JTextField pathField;
 	private JButton pathButt;
 	
+	private JLabel infoLabel;
+	
 	private Frame() {
+		sifra = new Sifra();
 		
 		JPanel mainPane = new JPanel();
 		
+		/*
+		 * Nastavení cesty k dokumentu
+		 */
 		pathLabel = new JLabel("Zadej cestu:");
 		pathLabel.setFont(font);
 		pathField = new JTextField(10);
@@ -33,6 +47,13 @@ public class Frame extends JFrame {
 		mainPane.add(pathField);
 		mainPane.add(pathButt);
 		add(mainPane);
+		
+		/*
+		 * Info label
+		 */
+		infoLabel = new JLabel("");
+		infoLabel.setFont(font);
+		mainPane.add(infoLabel, Component.CENTER_ALIGNMENT);
 	}
 	
 	public static void makeFrame() {	
@@ -40,9 +61,8 @@ public class Frame extends JFrame {
 		fr.setTitle("App by Rousek, Vágner");
 		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fr.setLocationRelativeTo(null);
-		fr.setSize(350, 200);
+		fr.setSize(350, 125);
 		fr.setVisible(true);
-		fr.pack();
 	}
 	
 	private class SetPathAction implements ActionListener{
@@ -51,6 +71,8 @@ public class Frame extends JFrame {
 			String path = pathField.getText();
 			try {
 				sifra.setPathTo(path);
+				
+				infoLabel.setText("Soubor úspěšně zašifrován.");
 			}catch(IOException ex) {
 				System.out.println("Chyba při načtení souboru.");
 			}

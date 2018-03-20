@@ -3,9 +3,10 @@ package sifrovani;
 import java.io.IOException;
 
 /**
+ * Interface sloužící ke tříde Sifra
  * 
  * @author Vít Vágner
- * @version 1.0
+ * @version 1.2
  *
  */
 
@@ -16,5 +17,7 @@ public interface ISifra {
 	void XOR();
 	
 	String sifrovani(String [] pole);
+	
+	void createNewFile() throws IOException;
 	
 }
