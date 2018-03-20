@@ -1,5 +1,6 @@
 package sifrovani;
 
+import java.io.IOException;
 
 /**
  * 
@@ -10,7 +11,7 @@ package sifrovani;
 
 public interface ISifra {
 	
-	void setPathTo(String path);
+	void setPathTo(String path) throws IOException;
 	
 	void XOR();
 	
