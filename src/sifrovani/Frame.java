@@ -23,30 +23,51 @@ public class Frame extends JFrame {
 	
 	private JLabel pathLabel;
 	private JTextField pathField;
-	private JButton pathButt;
+	
+	private JLabel passLabel;
+	private JTextField passField;
+	private JButton sifrButt;
 	
 	private JLabel infoLabel;
 	
 	private Frame() {
 		sifra = new Sifra();
 		
-		JPanel mainPane = new JPanel();
-		
+		JPanel mainPane = new JPanel();		
 		/*
 		 * Nastavení cesty k dokumentu
 		 */
+		JPanel pathPane = new JPanel();
+		
 		pathLabel = new JLabel("Zadej cestu:");
 		pathLabel.setFont(font);
+		
 		pathField = new JTextField(10);
 		pathField.setFont(font);
-		pathButt = new JButton("Nacti");
-		pathButt.addActionListener(new SetPathAction());
-		pathButt.setFont(font);
 		
-		mainPane.add(pathLabel);
-		mainPane.add(pathField);
-		mainPane.add(pathButt);
-		add(mainPane);
+		pathPane.add(pathLabel);
+		pathPane.add(pathField);
+		mainPane.add(pathPane);
+		
+		/*
+		 * Zadání binárního hesla
+		 */
+		JPanel passPane = new JPanel();
+		
+		passLabel = new JLabel("Zadej heslo k šifrování (binárně):");
+		passLabel.setFont(font);
+		
+		passField = new JTextField(5);
+		passField.setFont(font);
+		
+		sifrButt = new JButton("Šifruj!");
+		sifrButt.setFont(font);
+		sifrButt.addActionListener(new SetPathAction());
+		
+		passPane.add(passLabel);
+		passPane.add(passField);
+		passPane.add(sifrButt);
+		mainPane.add(passPane);
 		
 		/*
 		 * Info label
@@ -54,6 +75,11 @@ public class Frame extends JFrame {
 		infoLabel = new JLabel("");
 		infoLabel.setFont(font);
 		mainPane.add(infoLabel, Component.CENTER_ALIGNMENT);
+		
+		/*
+		 * Přidání mainPane
+		 */
+		add(mainPane);
 	}
 	
 	public static void makeFrame() {	
@@ -61,7 +87,7 @@ public class Frame extends JFrame {
 		fr.setTitle("App by Rousek, Vágner");
 		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fr.setLocationRelativeTo(null);
-		fr.setSize(350, 125);
+		fr.setSize(425, 150);
 		fr.setVisible(true);
 	}
 	
@@ -69,10 +95,15 @@ public class Frame extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			String path = pathField.getText();
+			String password = passField.getText();
 			try {
 				sifra.setPathTo(path);
+				sifra.setPassword(password);
 				
-				infoLabel.setText("Soubor úspěšně zašifrován.");
+				infoLabel.setText("Nový soubor úspěšně zašifrován a vytvořen.");
+				sifra.createNewFile();
+			}catch(PassException e1) {
+				System.out.println("Chybně zadané heslo.");
 			}catch(IOException ex) {
 				System.out.println("Chyba při načtení souboru.");
 			}
