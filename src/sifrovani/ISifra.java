@@ -6,7 +6,7 @@ import java.io.IOException;
  * Interface sloužící ke tříde Sifra
  * 
  * @author Vít Vágner
- * @version 1.2
+ * @version 1.3
  *
  */
 
