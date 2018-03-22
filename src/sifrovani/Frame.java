@@ -54,7 +54,7 @@ public class Frame extends JFrame {
 		 */
 		JPanel passPane = new JPanel();
 		
-		passLabel = new JLabel("Zadej heslo k šifrování (binárně):");
+		passLabel = new JLabel("Zadej heslo k šifrování:");
 		passLabel.setFont(font);
 		
 		passField = new JTextField(5);
@@ -98,10 +98,10 @@ public class Frame extends JFrame {
 			String password = passField.getText();
 			try {
 				sifra.setPathTo(path);
-				sifra.setPassword(password);
+				sifra.setCode(password);
 				
 				infoLabel.setText("Nový soubor úspěšně zašifrován a vytvořen.");
-				sifra.createNewFile();
+				
 			}catch(PassException e1) {
 				System.out.println("Chybně zadané heslo.");
 			}catch(IOException ex) {

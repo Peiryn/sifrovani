@@ -14,12 +14,12 @@ public interface ISifra {
 	
 	void setPathTo(String path) throws IOException;
 	
-	void setPassword(String password) throws PassException;
+	void setCode(String password) throws PassException;
 	
-	void XOR();
+	void cipher() throws IOException;
 	
-	String sifrovani(String [] pole);
+	void noCipher() throws IOException;
 	
-	void createNewFile() throws IOException;
+	
 	
 }
