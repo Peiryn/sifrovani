@@ -1,22 +1,11 @@
 package sifrovani;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.ByteBuffer;
+import java.io.*;
 /**
  * 
  * @author Tomáš Rousek
  * @version 1.0
  */
-
-
-
 
 public class Sifra implements ISifra {
 	
@@ -25,6 +14,13 @@ public class Sifra implements ISifra {
 	private String textInFile;
 	private char [] code;
 	
+	/*
+	 * Konstruktor
+	 */
+	public Sifra(String code, String path) throws IOException {
+		this.setPathTo(path);
+		this.setCode(code);
+	}
 	
 	private void ReadFile() throws IOException {
 		bf = new BufferedReader(new FileReader(file));
@@ -35,25 +31,22 @@ public class Sifra implements ISifra {
 		bf.close();
 	}
 
-	@Override
-	public void setPathTo(String path) throws IOException {
-		
-		file = new File(path);
-		  ReadFile();
-		  
-	}
 
-	
+	@Override
+	public void setPathTo(String path) throws IOException {		
+		file = new File(path);
+		ReadFile();		  
+	}
 
 	@Override
 	public void setCode(String code) {
 		this.code = code.toCharArray();
 	}  
 	
-	
+	@Override
 	public void cipher() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
-		BufferedWriter bw = new BufferedWriter(new FileWriter("new_"+file.getName()));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("encrypted_"+file.getName()));
 		
 		String word;
 		String [] array;
@@ -81,6 +74,7 @@ public class Sifra implements ISifra {
 		bw.close();
 	}
 	  
+	@Override
 	public void noCipher() throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
 		String textInFile = "";

@@ -12,14 +12,14 @@ import javax.swing.*;
  * Třída sloužící jako user interface k programu
  * 
  * @author Vít Vágner
- * @version 1.0
+ * @version 1.2
  *
  */
 public class Frame extends JFrame {
 	
 	private ISifra sifra;
 	
-	private Font font = new Font("Tahoma", Font.PLAIN, 16);
+	private Font font = new Font("Tahoma", Font.PLAIN, 20);
 	
 	private JLabel pathLabel;
 	private JTextField pathField;
@@ -30,10 +30,11 @@ public class Frame extends JFrame {
 	
 	private JLabel infoLabel;
 	
+	
 	private Frame() {
-		sifra = new Sifra();
 		
-		JPanel mainPane = new JPanel();		
+		JPanel mainPane = new JPanel();	
+		
 		/*
 		 * Nastavení cesty k dokumentu
 		 */
@@ -87,7 +88,7 @@ public class Frame extends JFrame {
 		fr.setTitle("App by Rousek, Vágner");
 		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fr.setLocationRelativeTo(null);
-		fr.setSize(425, 150);
+		fr.setSize(425, 200);
 		fr.setVisible(true);
 	}
 	
@@ -96,9 +97,13 @@ public class Frame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String path = pathField.getText();
 			String password = passField.getText();
+			
 			try {
+				sifra = new Sifra(path, password);
+				
 				sifra.setPathTo(path);
 				sifra.setCode(password);
+				sifra.cipher();
 				
 				infoLabel.setText("Nový soubor úspěšně zašifrován a vytvořen.");
 				

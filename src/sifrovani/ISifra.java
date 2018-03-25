@@ -14,12 +14,10 @@ public interface ISifra {
 	
 	void setPathTo(String path) throws IOException;
 	
-	void setCode(String password) throws PassException;
+	void setCode(String password);
 	
 	void cipher() throws IOException;
 	
 	void noCipher() throws IOException;
-	
-	
 	
 }
