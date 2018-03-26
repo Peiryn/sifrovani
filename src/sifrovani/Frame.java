@@ -32,6 +32,7 @@ public class Frame extends JFrame {
 	
 	
 	private Frame() {
+		sifra = new Sifra();
 		
 		JPanel mainPane = new JPanel();	
 		
@@ -96,19 +97,15 @@ public class Frame extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			String path = pathField.getText();
-			String password = passField.getText();
+			String code = passField.getText();
 			
 			try {
-				sifra = new Sifra(path, password);
-				
 				sifra.setPathTo(path);
-				sifra.setCode(password);
+				sifra.setCode(code);
 				sifra.cipher();
 				
 				infoLabel.setText("Nový soubor úspěšně zašifrován a vytvořen.");
 				
-			}catch(PassException e1) {
-				System.out.println("Chybně zadané heslo.");
 			}catch(IOException ex) {
 				System.out.println("Chyba při načtení souboru.");
 			}

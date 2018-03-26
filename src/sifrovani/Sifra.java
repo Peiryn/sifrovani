@@ -14,14 +14,6 @@ public class Sifra implements ISifra {
 	private String textInFile;
 	private char [] code;
 	
-	/*
-	 * Konstruktor
-	 */
-	public Sifra(String code, String path) throws IOException {
-		this.setPathTo(path);
-		this.setCode(code);
-	}
-	
 	private void ReadFile() throws IOException {
 		bf = new BufferedReader(new FileReader(file));
 		String s;
