@@ -38,7 +38,7 @@ public class Sifra implements ISifra {
 	@Override
 	public void cipher() throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF8"));
-		BufferedWriter bw = new BufferedWriter(new FileWriter("encrypted_"+file.getName()));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(file.getAbsolutePath()+"_encrypted.txt"));
 		
 		String word;
 		String [] array;
